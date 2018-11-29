@@ -11,7 +11,7 @@ package ejercicio6psp;
  */
 public class Caja {
     
-    private static float dinero = 1000;
+    private static float dinero = 0;
     //Se declaran dos variables para saber el estado de la caja
     private boolean cajaLlena = false;
     private boolean cajaVacia = true;
@@ -20,7 +20,7 @@ public class Caja {
     public synchronized void retirar(float dRetiro) throws InterruptedException {
 
         while (cajaVacia == false) {
-            wait(); //Sale del bucle cuando "cajaVacia" cambia a "false"
+            wait(); //Sale del bucle cuando "cajaVacia" cambia a "true"
         }
 
         dinero -= dRetiro;
