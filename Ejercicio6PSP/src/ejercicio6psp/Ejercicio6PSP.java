@@ -16,7 +16,11 @@ public class Ejercicio6PSP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        Caja c = new Caja();
+        Productor p1 = new Productor(c);
+        Consumidor c1 = new Consumidor(c);
+        p1.start();
+        c1.start();
     }
     
 }
