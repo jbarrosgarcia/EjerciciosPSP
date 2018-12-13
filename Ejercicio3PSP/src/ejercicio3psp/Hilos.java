@@ -12,31 +12,35 @@ package ejercicio3psp;
 public class Hilos extends Thread {
 
     Thread thread;
-    int cont = 0;
+    int conta
 
-    public Hilos(String name) {
+    public Hilos(String name,int cont) {
         super(name);
+        conta=cont;
     }
 
     public void run() {
+        
         try {
             // Se indica que el bucle ha comenzado:
             System.out.println("El " + getName() + " ha comenzado");
             // Bucle que crearÃ¡ un thread por cada vuelta que da:
-            if (cont < 5) // El numero del thread:
+            if (conta < 5) // El numero del thread:
             {
-                cont++;
-
-                // Se crea el siguiente thread:
-                thread = new Hilos("Thread" + cont);
+                conta++;
+                
+                      // Se crea el siguiente thread:
+                thread = new Hilos("Thread "+conta, conta);
                 // Inicia el siguiente thread
-                thread.start();
+                thread.run();
                 // Se señala que el thread esta¡ en ejecucion:
+                
+              
 
                 System.out.println(getName() + " procesando");
                 sleep((long) ((Math.random() * (600 - 100)) + 100));
-
-                thread.join();
+                   
+//                thread.join();
                 System.out.println("El " + getName() + " ha terminado");
             }
         } catch (InterruptedException ex) {
