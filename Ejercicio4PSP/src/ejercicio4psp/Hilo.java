@@ -26,7 +26,7 @@ public class Hilo extends Thread {
     public void run() {
         try {
             // Se indica que el bucle ha comenzado:
-            System.out.println("El " + getName() + " ha comenzado");
+            System.out.println("El " + getName()+" "+count + " ha comenzado");
             // Bucle que creara¡ un thread por cada vuelta que da:
             while (count <= 3) {
                 int suma = 0;
@@ -37,7 +37,7 @@ public class Hilo extends Thread {
                         for (int i = 0; i <= 1000; i += 2) {
                             suma = suma + i;
                         }
-                        System.out.println(getName() + ": (Suma pares) = " + suma);
+                        System.out.println(getName()+" "+count + ": (Suma pares) = " + suma);
                         break;
                     case 2:
                         // Se señala que el thread esta¡ en ejecucion:
