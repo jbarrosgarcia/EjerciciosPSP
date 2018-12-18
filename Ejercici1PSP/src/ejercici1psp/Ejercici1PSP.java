@@ -30,6 +30,7 @@ public class Ejercici1PSP {
             System.out.println("Termina thread " + this.getName());
         }
     }
+    //se elimina la clase que no estaba en uso
 
     /**
      * @param args the command line arguments
