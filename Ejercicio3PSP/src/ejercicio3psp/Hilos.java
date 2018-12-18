@@ -12,7 +12,7 @@ package ejercicio3psp;
 public class Hilos extends Thread {
 
     Thread thread;
-    int conta
+    int conta;
 
     public Hilos(String name,int cont) {
         super(name);
