@@ -16,7 +16,7 @@ public class Ejercicio4PSP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new Hilo("").start();
+        new Hilo("Thread").start();
     }
     
 }
