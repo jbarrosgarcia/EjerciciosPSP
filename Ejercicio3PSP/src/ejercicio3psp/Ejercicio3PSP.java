@@ -16,7 +16,7 @@ public class Ejercicio3PSP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Thread hilo1=new Hilos("",0);
+        Thread hilo1=new Hilos("Thread 0",0);
         hilo1.start();
     }
     
