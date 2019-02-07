@@ -5,15 +5,11 @@
  */
 package calculadoracliente;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Arrays;
 
 /**
  *
@@ -24,53 +20,50 @@ public class CalculadoraCliente {
     /**
      * @param args the command line arguments
      */
-     public static void main(String[] args) throws IOException {
-            String numero, cad2,tipo;
-            
-            String resultado = "";
-            
-            String urlpuerto = "localhost";
-            
-            int puertoentrada  =1111;
-            
-            try{
-            Socket sc1 = new Socket(urlpuerto,puertoentrada);
-            InputStreamReader isr = new InputStreamReader (System.in);
-            	InputStream is = sc1.getInputStream();
-			BufferedReader bf = new BufferedReader(isr);	
-			OutputStream os1 = sc1.getOutputStream();
-			DataOutputStream dos1 = new DataOutputStream(os1);
-			DataInputStream dis = new DataInputStream(is);
+     private byte[] respuesta;
 
+       public String ejecutar(String operacion) {
+        try {
+            System.out.println("Creando socket cliente");
+            Socket clienteSocket = new Socket();
+            System.out.println("Estableciendo la conexi�n");
 
-			System.out.println("Dame un numero para enviar al servidor: ");
-			numero = bf.readLine();
-			dos1.writeUTF(numero);
-                        
-                        
-                        
-                        System.out.println("Que tipo de operacion quieres");
-			System.out.println("1)Suma 2)Resta 3)Multiplicacion 4)Division");
-			tipo = bf.readLine();
-			dos1.writeUTF(tipo);
-                        
-                       
-                        System.out.println("Dame un otro numero para enviar al servidor: ");
-			numero = bf.readLine();
-			dos1.writeUTF(numero);
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            clienteSocket.connect(addr);
 
-			resultado = dis.readUTF();
-			System.out.println("El resultado es: " + resultado);
+            InputStream is = clienteSocket.getInputStream();
+            OutputStream os = clienteSocket.getOutputStream();
 
-			dos1.flush();	
-			dos1.close();
+            System.out.println("Enviando mensaje");
+
+            String mensaje = operacion;
+            byte[] mens=new byte[30];
+            byte[] bytesMensaje=mensaje.getBytes();
+            for(int i=0;i<mensaje.getBytes().length;i++){
+                mens[i]=bytesMensaje[i];
+            }           
             
+            os.write(mens);
             
+            System.out.println("Mensaje enviado");
             
-            }
-        catch(IOException e ){
-        System.out.println("Error : no se encontro el servidor");
+            //Esto es el numero de bytes que leemos? parece que si
+            respuesta = new byte[30];
+            //el metodo is.read() devuelve el numero de bytes leidos del stream
+            int bytesLeidos=is.read(respuesta);
+            
+            System.out.println(new String(respuesta));
+
+            System.out.println("Cerrando el socket cliente");
+
+            clienteSocket.close();
+
+            System.out.println("Terminado");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-}
+        return new String(respuesta);
+    }
+    
 }
