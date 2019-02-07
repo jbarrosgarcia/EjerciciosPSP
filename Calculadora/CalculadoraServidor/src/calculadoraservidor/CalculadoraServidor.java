@@ -69,7 +69,10 @@ public class CalculadoraServidor {
                         resultado=0;
                     }
                     respuesta = respuesta + resultado;
-                } else if (valores[2].equals("salir")) {
+                }else if(valores[2].equals("raiz")){
+                    resultado=(float) Math.sqrt(valor1);
+                }
+                else if (valores[2].equals("salir")) {
                     respuesta = "Gracias por utilizar la calculadora de Jose";
                 }else{
                     respuesta = "Operacion no valida";
