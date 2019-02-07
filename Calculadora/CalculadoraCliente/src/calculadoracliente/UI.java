@@ -64,11 +64,12 @@ public class UI extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButtonSuma = new javax.swing.JButton();
-        jButtonDivide = new javax.swing.JButton();
         jButtonCE = new javax.swing.JButton();
         jButtonC = new javax.swing.JButton();
         jButtonPunto = new javax.swing.JButton();
         jButtonIgual = new javax.swing.JButton();
+        jButtonDivide1 = new javax.swing.JButton();
+        raiz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,21 +305,6 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jButtonSuma, gridBagConstraints);
 
-        jButtonDivide.setBackground(new java.awt.Color(204, 204, 204));
-        jButtonDivide.setText("/");
-        jButtonDivide.setMaximumSize(new java.awt.Dimension(50, 50));
-        jButtonDivide.setMinimumSize(new java.awt.Dimension(50, 50));
-        jButtonDivide.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButtonDivide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDivideActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 5;
-        jPanel1.add(jButtonDivide, gridBagConstraints);
-
         jButtonCE.setBackground(new java.awt.Color(204, 204, 204));
         jButtonCE.setText("CE");
         jButtonCE.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -332,6 +318,7 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButtonCE, gridBagConstraints);
 
         jButtonC.setBackground(new java.awt.Color(204, 204, 204));
@@ -347,6 +334,7 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButtonC, gridBagConstraints);
 
         jButtonPunto.setBackground(new java.awt.Color(204, 204, 204));
@@ -377,7 +365,35 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButtonIgual, gridBagConstraints);
+
+        jButtonDivide1.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonDivide1.setText("/");
+        jButtonDivide1.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonDivide1.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonDivide1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonDivide1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDivide1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        jPanel1.add(jButtonDivide1, gridBagConstraints);
+
+        raiz.setText("Raiz cuadr");
+        raiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raizActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(raiz, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -445,10 +461,6 @@ public class UI extends javax.swing.JFrame {
         operacion("*");
     }//GEN-LAST:event_jButtonMultiplicaActionPerformed
 
-    private void jButtonDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivideActionPerformed
-        operacion("/");
-    }//GEN-LAST:event_jButtonDivideActionPerformed
-
     private void jButtonCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCEActionPerformed
         borrarTodo();
     }//GEN-LAST:event_jButtonCEActionPerformed
@@ -464,6 +476,14 @@ public class UI extends javax.swing.JFrame {
     private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
         borrarNumeroActual();
     }//GEN-LAST:event_jButtonCActionPerformed
+
+    private void jButtonDivide1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivide1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDivide1ActionPerformed
+
+    private void raizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raizActionPerformed
+        operacion("raiz");
+    }//GEN-LAST:event_raizActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,7 +658,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonC;
     private javax.swing.JButton jButtonCE;
-    private javax.swing.JButton jButtonDivide;
+    private javax.swing.JButton jButtonDivide1;
     private javax.swing.JButton jButtonIgual;
     private javax.swing.JButton jButtonMultiplica;
     private javax.swing.JButton jButtonPunto;
@@ -647,5 +667,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPantallaPrincipal;
     private javax.swing.JLabel jLabelPantallaTop;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton raiz;
     // End of variables declaration//GEN-END:variables
 }
