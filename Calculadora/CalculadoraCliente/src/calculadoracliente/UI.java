@@ -383,7 +383,7 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         jPanel1.add(jButtonDivide1, gridBagConstraints);
 
-        raiz.setText("Raiz cuadr");
+        raiz.setText("sqrt");
         raiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 raizActionPerformed(evt);
@@ -482,7 +482,8 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDivide1ActionPerformed
 
     private void raizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raizActionPerformed
-        operacion("raiz");
+       char a = '\u221A';
+       operacion(" "+a+" ");
     }//GEN-LAST:event_raizActionPerformed
 
     /**

@@ -570,7 +570,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="raiz">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Raiz cuadr"/>
+            <Property name="text" type="java.lang.String" value="sqrt"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="raizActionPerformed"/>
