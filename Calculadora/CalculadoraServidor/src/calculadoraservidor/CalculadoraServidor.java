@@ -4,14 +4,9 @@
  * and open the template in the editor.
  */
 package calculadoraservidor;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,86 +15,94 @@ import java.net.Socket;
  * @author jose_
  */
 public class CalculadoraServidor {
+ private static boolean salir = false;
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-        System.out.println("Estoy en escucha");
-            int x, y ;
-            ServerSocket ss= null;
-            //String url = "localhost";
-            String numero1,numero2, tipo;
-            int puerto = 1111;
-            float resultado = 0 ;
-            
-            
-            try { 
-                ss = new ServerSocket(puerto);
-                
-                Socket s1 = ss.accept();
-                
-                InputStream is = s1.getInputStream();
-                OutputStream os1 = s1.getOutputStream();
-                DataInputStream dis = new DataInputStream(is);
-                DataOutputStream dos1 = new DataOutputStream(os1);
-                
-             
-                System.out.println("Esperando al 1er numero...");
-                numero1 = dis.readUTF();
-                
-                System.out.println("El numero recibido es "+ numero1);
-                
-                
-                System.out.println("Esperando del tipo de operacion");
-                tipo = dis.readUTF();
-                System.out.println("El tipo de operacion es : " + tipo );
-                
-                
-                System.out.println(" Esperando el 2º numero");
-                numero2= dis.readUTF();
-                
-                System.out.println("El segundo numero recibido es "+ numero2);
-                
-                x= Integer.parseInt(numero1);
-                y = Integer.parseInt(numero2);
-                
-                if(tipo.equals("+")||tipo.equals("1")){
-                    resultado = x+y ;
-                
+     public static void main(String[] args) {
+        try {
+            //System.out.println("Creando socket servidor");
+            while (!salir) {
+                ServerSocket serverSocket = new ServerSocket();
+
+                //System.out.println("Realizando el bind");
+                InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+                serverSocket.bind(addr);
+
+                //System.out.println("Aceptando conexiones");
+                Socket newSocket = serverSocket.accept();
+
+                //System.out.println("Conexi�n recibida");
+                InputStream is = newSocket.getInputStream();
+                OutputStream os = newSocket.getOutputStream();
+
+                //Esto es el numero de bytes que leemos? parece que si
+                byte[] mensaje = new byte[30];
+                //el metodo is.read() devuelve el numero de bytes leidos del stream
+                int bytesLeidos = is.read(mensaje);
+
+                //tras leer la string recibida, separamos sus parametros
+                String[] valores = new String(mensaje).trim().split(",");
+
+                System.out.println("Mensaje recibido: " + valores[0] + "," + valores[1] + "," + valores[2]);
+
+                //Filtramos las operaciones y guardamos el resultado en respuesta
+                String respuesta = "";
+                float valor1 = Float.parseFloat(valores[0]);
+                float valor2 = Float.parseFloat(valores[1]);
+                float resultado;
+                if (valores[2].equals("+")) {
+                    resultado = valor1 + valor2;
+                    respuesta = respuesta + resultado;
+                } else if (valores[2].equals("-")) {
+                    resultado = valor1 - valor2;
+                    respuesta = respuesta + resultado;
+                } else if (valores[2].equals("*")) {
+                    resultado = valor1 * valor2;
+                    respuesta = respuesta + resultado;
+                } else if (valores[2].equals("/")) {
+                    if(valor1!=0 && valor2!=0){
+                        resultado = valor1 / valor2;
+                    }else {
+                        //para evitar los infinitos, aunque no sea tecnicamente correcto
+                        resultado=0;
+                    }
+                    respuesta = respuesta + resultado;
+                } else if (valores[2].equals("salir")) {
+                    respuesta = "Gracias por utilizar la calculadora de Jose";
+                }else{
+                    respuesta = "Operacion no valida";
                 }
-                
-                else if(tipo.equals("-")||tipo.equals("2")){
-                    resultado = x-y;
-                
+
+                //enviamos la respuesta
+                byte[] mens = new byte[30];
+                byte[] bytesMensaje = respuesta.getBytes();
+                for (int i = 0; i < respuesta.getBytes().length; i++) {
+                    mens[i] = bytesMensaje[i];
                 }
-                
-                else if (tipo.equals("*")||tipo.equals("3")){
-                resultado = x * y;
-                
+
+                os.write(mens);
+
+                if (valores[2].equals("salir")) {
+                    newSocket.close();
+                    serverSocket.close();
+                    salir = true;
+                } else {
+                    newSocket.close();
+                    serverSocket.close();
                 }
-                else if (tipo.equals("/")||tipo.equals("4")){
-                resultado = x/y ;
-                
-                }
-                
-                
-                else{
-                System.out.println("Error en la operación");
-                
-                }
-                
-                System.out.println("El resultado es "+ resultado);
-                dos1.writeUTF(Float.toString(resultado));
-                
-                
-                s1.close();
-                dis.close();
-                
+
             }
-            catch(IOException e ){
-            System.out.println("Error en el cliente");
-            
-            }
+            //System.out.println("Cerrando el nuevo socket");
+
+            //newSocket.close();
+            //System.out.println("Cerrando el socket servidor");
+            //serverSocket.close();
+            //System.out.println("Terminado");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
 }
