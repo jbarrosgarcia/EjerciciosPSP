@@ -40,7 +40,7 @@ public class Hilos extends Thread {
                 System.out.println(getName() + " procesando");
                 sleep((long) ((Math.random() * (600 - 100)) + 100));
                    
-//                thread.join();
+                  thread.join();
                 System.out.println("El " + getName() + " ha terminado");
             }
         } catch (InterruptedException ex) {

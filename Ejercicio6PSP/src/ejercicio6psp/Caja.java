@@ -11,7 +11,7 @@ package ejercicio6psp;
  */
 public class Caja {
     
-    private static float dinero = 0;
+    private static float dinero = 1000;
     //Se declaran dos variables para saber el estado de la caja
     private boolean cajaLlena = false;
     private boolean cajaVacia = true;
@@ -47,6 +47,14 @@ public class Caja {
             notify();
         }
 
+    }
+
+    public static float getDinero() {
+        return dinero;
+    }
+
+    public static void setDinero(float dinero) {
+        Caja.dinero = dinero;
     }
 
 }

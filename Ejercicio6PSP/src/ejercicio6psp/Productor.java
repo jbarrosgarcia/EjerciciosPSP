@@ -31,7 +31,7 @@ public class Productor extends Thread {
             try {
                 caja.añadir(dineroAñadir);
                 //Imprime la cantidad de dinero que se ha retirado
-                System.out.println("Se han añadido "+dineroAñadir+" euros");
+                System.out.println("Se han añadido "+dineroAñadir+" euros"+" Fondos "+caja.getDinero());
             } catch (InterruptedException ex) {
                 System.out.println("No se pudo añadir el dinero");
             }

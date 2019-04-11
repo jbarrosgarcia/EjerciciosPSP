@@ -23,7 +23,7 @@ public class Consumidor extends Thread {
             int retirarAleatorio = (int) (Math.random() * 1000 + 1);
             try {
                 caja.retirar(retirarAleatorio);
-                System.out.println(retirarAleatorio + " euros retirados");
+                System.out.println(retirarAleatorio + " euros retirados"+" Fondos"+caja.getDinero());
                 //Esperar más para retirar
 
             } catch (InterruptedException ex) {
